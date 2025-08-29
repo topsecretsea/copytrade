@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Join on Telegram</title>
+  <title>Open on Telegram</title>
   <meta name="description" content="Click the button to talk to me on Telegram." />
   <meta name="theme-color" content="#101827" />
-  <meta property="og:title" content="Join on Telegram" />
+  <meta property="og:title" content="Open on Telegram" />
   <meta property="og:description" content="Click the button to talk with me on Telegram." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="" />
@@ -65,53 +65,11 @@
 
   <script>
     // ====== CONFIG ======
-    const TELEGRAM_URL = "https://t.me/your_channel_here"; // replace with your Telegram link
-    const META_PIXEL_ID = "672982815142267";               // your Meta Ads Pixel ID
+    const TELEGRAM_URL = "https://t.me/+o4VZafff0vFlZGJh"; // seu canal do Telegram
+    const META_PIXEL_ID = "672982815142267";               // seu Pixel do Meta Ads
 
     function withQueryParams(baseUrl) {
       try {
         const qs = window.location.search;
         if (!qs) return baseUrl;
         return baseUrl + (baseUrl.includes("?") ? "&" : "?") + qs.slice(1);
-      } catch { return baseUrl; }
-    }
-
-    function goTelegram() {
-      const finalUrl = withQueryParams(TELEGRAM_URL);
-      try { if (window.fbq) { fbq('trackCustom', 'telegram_entry', { destination: finalUrl }); } } catch(e){}
-      window.open(finalUrl, '_blank', 'noopener');
-    }
-
-    (function initPixel(){
-      if (!META_PIXEL_ID) return;
-      !(function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)})(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', META_PIXEL_ID);
-      fbq('track', 'PageView');
-    })();
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const raw = document.getElementById('rawLink');
-      raw.textContent = withQueryParams(TELEGRAM_URL);
-    });
-  </script>
-  <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=672982815142267&ev=PageView&noscript=1"/></noscript>
-</head>
-<body>
-  <main class="card" role="main">
-    <h1>Join me on Telegram</h1>
-    <p>Click the button below to open my Telegram.</p>
-
-    <button class="btn" onclick="goTelegram()" aria-label="Open Telegram now">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-      Enter Telegram
-    </button>
-
-    <div class="hint">If it doesn’t open, copy and paste this link in your browser:</div>
-    <div id="rawLink" class="copybox" title="Click to copy the link"></div>
-
-    <footer>© <span id="year"></span> • Lightweight page hosted on GitHub Pages</footer>
-  </main>
-
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-</body>
-</html>
