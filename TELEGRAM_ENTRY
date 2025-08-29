@@ -1,118 +1,78 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Open on Telegram</title>
-  <meta name="description" content="Click the button to talk to me on Telegram." />
-  <meta name="theme-color" content="#101827" />
-  <meta property="og:title" content="Open on Telegram" />
-  <meta property="og:description" content="Click the button to talk with me on Telegram." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="" />
-  <meta name="robots" content="noindex,follow" />
-
+  <meta name="description" content="Tap the button to open my Telegram.">
+  <meta name="robots" content="noindex,follow">
+  <meta property="og:title" content="Open on Telegram">
+  <meta property="og:description" content="Tap the button to open my Telegram.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="">
+  <meta name="theme-color" content="#101827">
   <style>
-    :root { --bg: #0b1220; --fg: #e5e7eb; --muted:#94a3b8; --btn:#22c55e; --btnh:#16a34a; }
+    :root { --bg: #0b1220; --fg: #e5e7eb; --muted:#94a3b8; --btn:#22c55e; }
     * { box-sizing: border-box; }
     html, body { height: 100%; }
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
-      color: var(--fg);
-      background: radial-gradient(1200px 800px at 50% -10%, #1f2937 0%, #0b1220 60%, #070b14 100%);
-      display: grid;
-      place-items: center;
-    }
-    .card {
-      width: min(92vw, 560px);
-      background: rgba(17, 24, 39, 0.75);
-      border: 1px solid rgba(148, 163, 184, 0.15);
-      border-radius: 24px;
-      padding: 28px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.35);
-      text-align: center;
-      backdrop-filter: blur(6px);
-    }
-    h1 { font-size: clamp(22px, 3vw, 28px); margin: 6px 0 12px; }
-    p { margin: 0 0 18px; color: var(--muted); }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      padding: 16px 18px;
-      font-weight: 700;
-      font-size: 16px;
-      letter-spacing: 0.3px;
-      color: white;
-      background: linear-gradient(180deg, var(--btn), #1fb154);
-      border: 0;
-      border-radius: 16px;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(34, 197, 94, .35);
-      transition: transform .06s ease, box-shadow .2s ease, filter .2s ease;
-    }
-    .btn:hover { filter: brightness(1.02); box-shadow: 0 10px 26px rgba(34, 197, 94, .4); }
-    .btn:active { transform: translateY(1px); }
-    .hint { margin-top: 14px; font-size: 13px; color: var(--muted); }
-    .link { color: #60a5fa; text-decoration: none; }
-    .link:hover { text-decoration: underline; }
-    .copybox { user-select: all; word-break: break-all; padding: 10px 12px; font-size: 12px; background: #0b1220; border: 1px dashed rgba(148, 163, 184, .35); border-radius: 12px; margin-top: 10px; }
-    footer { margin-top: 16px; font-size: 11.5px; color: #6b7280; }
+    body { margin:0; font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,sans-serif; color:var(--fg); background: radial-gradient(1200px 800px at 50% -10%, #1f2937 0%, #0b1220 60%, #070b14 100%); display:grid; place-items:center; }
+    .card { width:min(92vw,560px); background:rgba(17,24,39,.75); border:1px solid rgba(148,163,184,.15); border-radius:24px; padding:28px; box-shadow:0 10px 30px rgba(0,0,0,.35); text-align:center; backdrop-filter:blur(6px); }
+    h1 { font-size:clamp(22px,3vw,28px); margin:6px 0 12px; }
+    p { margin:0 0 18px; color:var(--muted); }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:16px 18px; font-weight:700; font-size:16px; letter-spacing:.3px; color:#fff; background:linear-gradient(180deg,var(--btn),#1fb154); border:0; border-radius:16px; cursor:pointer; box-shadow:0 8px 20px rgba(34,197,94,.35); transition:transform .06s ease, box-shadow .2s ease, filter .2s ease; text-decoration:none; }
+    .btn:hover { filter:brightness(1.02); box-shadow:0 10px 26px rgba(34,197,94,.4); }
+    .btn:active { transform:translateY(1px); }
+    .hint { margin-top:14px; font-size:13px; color:var(--muted); }
+    .copybox { user-select:all; word-break:break-all; padding:10px 12px; font-size:12px; background:#0b1220; border:1px dashed rgba(148,163,184,.35); border-radius:12px; margin-top:10px; }
+    footer { margin-top:16px; font-size:11.5px; color:#6b7280; }
   </style>
-
-  <script>
-    // ====== CONFIG ======
-    const TELEGRAM_URL = "https://t.me/+o4VZafff0vFlZGJh"; // seu canal do Telegram
-    const META_PIXEL_ID = "672982815142267";               // seu Pixel do Meta Ads
-
-    function withQueryParams(baseUrl) {
-      try {
-        const qs = window.location.search;
-        if (!qs) return baseUrl;
-        return baseUrl + (baseUrl.includes("?") ? "&" : "?") + qs.slice(1);
-      } catch { return baseUrl; }
-    }
-
-    function goTelegram() {
-      const finalUrl = withQueryParams(TELEGRAM_URL);
-      try { if (window.fbq) { fbq('trackCustom', 'telegram_entry', { destination: finalUrl, ts: Date.now() }); } } catch(e){}
-      window.open(finalUrl, '_blank', 'noopener');
-    }
-
-    (function initPixel(){
-      if (!META_PIXEL_ID) return;
-      !(function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)})(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', META_PIXEL_ID);
-      fbq('track', 'PageView');
-      try { fbq('trackCustom', 'ViewContent_Telegram', { page: 'github_pages_single_button' }); } catch(e){}
-    })();
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const raw = document.getElementById('rawLink');
-      raw.textContent = withQueryParams(TELEGRAM_URL);
-    });
-  </script>
-  <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=672982815142267&ev=PageView&noscript=1"/></noscript>
 </head>
 <body>
   <main class="card" role="main">
     <h1>Open on Telegram</h1>
-    <p>Click the button below to open my Telegram.</p>
+    <p>Tap the button below to open my Telegram.</p>
 
-    <button class="btn" onclick="goTelegram()" aria-label="Open Telegram now">
+    <a id="tgButton" class="btn" href="#" role="button" aria-label="Open Telegram now">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
       Open on Telegram
-    </button>
+    </a>
 
-    <div class="hint">If it doesn't open, copy and paste this link in your browser:</div>
+    <div class="hint">If it doesn't open, copy this link:</div>
     <div id="rawLink" class="copybox" title="Click to copy the link"></div>
 
-    <footer>© <span id="year"></span> • Lightweight page hosted on GitHub Pages</footer>
+    <footer>© <span id="year"></span> • Hosted on GitHub Pages</footer>
   </main>
 
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+  (function(){
+    var TELEGRAM_URL = "https://t.me/+o4VZafff0vFlZGJh"; // your Telegram channel
+    var META_PIXEL_ID = "672982815142267";                // your Meta Ads Pixel ID
+
+    function withQueryParams(baseUrl){
+      try { var qs = window.location.search; if(!qs) return baseUrl; return baseUrl + (baseUrl.indexOf('?')>-1 ? '&' : '?') + qs.slice(1); } catch(e){ return baseUrl; }
+    }
+
+    function goTelegram(e){
+      if(e && e.preventDefault) e.preventDefault();
+      var finalUrl = withQueryParams(TELEGRAM_URL);
+      try { if(window.fbq){ window.fbq('trackCustom','telegram_entry',{ destination: finalUrl, ts: Date.now() }); } } catch(err){}
+      window.open(finalUrl,'_blank','noopener');
+    }
+
+    // Init Pixel (safe)
+    (function(){
+      if(!META_PIXEL_ID) return;
+      !(function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)})(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      try { fbq('init', META_PIXEL_ID); fbq('track','PageView'); fbq('trackCustom','ViewContent_Telegram',{ page: 'github_pages_single_button' }); } catch(err){}
+    })();
+
+    document.addEventListener('DOMContentLoaded', function(){
+      var btn = document.getElementById('tgButton'); if(btn) btn.addEventListener('click', goTelegram);
+      var raw = document.getElementById('rawLink'); if(raw) raw.textContent = withQueryParams(TELEGRAM_URL);
+      var y = document.getElementById('year'); if(y) y.textContent = new Date().getFullYear();
+    });
+  })();
+  </script>
+  <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=672982815142267&ev=PageView&noscript=1"></noscript>
 </body>
 </html>
