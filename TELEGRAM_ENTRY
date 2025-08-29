@@ -73,3 +73,46 @@
         const qs = window.location.search;
         if (!qs) return baseUrl;
         return baseUrl + (baseUrl.includes("?") ? "&" : "?") + qs.slice(1);
+      } catch { return baseUrl; }
+    }
+
+    function goTelegram() {
+      const finalUrl = withQueryParams(TELEGRAM_URL);
+      try { if (window.fbq) { fbq('trackCustom', 'telegram_entry', { destination: finalUrl, ts: Date.now() }); } } catch(e){}
+      window.open(finalUrl, '_blank', 'noopener');
+    }
+
+    (function initPixel(){
+      if (!META_PIXEL_ID) return;
+      !(function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)})(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', META_PIXEL_ID);
+      fbq('track', 'PageView');
+      try { fbq('trackCustom', 'ViewContent_Telegram', { page: 'github_pages_single_button' }); } catch(e){}
+    })();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const raw = document.getElementById('rawLink');
+      raw.textContent = withQueryParams(TELEGRAM_URL);
+    });
+  </script>
+  <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=672982815142267&ev=PageView&noscript=1"/></noscript>
+</head>
+<body>
+  <main class="card" role="main">
+    <h1>Open on Telegram</h1>
+    <p>Click the button below to open my Telegram.</p>
+
+    <button class="btn" onclick="goTelegram()" aria-label="Open Telegram now">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+      Open on Telegram
+    </button>
+
+    <div class="hint">If it doesn't open, copy and paste this link in your browser:</div>
+    <div id="rawLink" class="copybox" title="Click to copy the link"></div>
+
+    <footer>© <span id="year"></span> • Lightweight page hosted on GitHub Pages</footer>
+  </main>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
