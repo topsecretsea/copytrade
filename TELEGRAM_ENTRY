@@ -5,59 +5,107 @@
   <title>Access Telegram Channel</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- META PIXEL -->
+  <!-- Meta Pixel (safe load) -->
   <script>
-    !function(f,b,e,v,n,t,s){
-      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
+    (function(){
+      var PIXEL_ID = "672982815142267";
+      if(!PIXEL_ID) return;
+      !(function(f,b,e,v,n,t,s){
+        if(f.fbq) return;
+        n=f.fbq=function(){ n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments) };
+        if(!f._fbq) f._fbq=n;
+        n.push=n; n.loaded=!0; n.version='2.0';
+        n.queue=[];
+        t=b.createElement(e); t.async=!0; t.src=v;
+        s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s);
+      })(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 
-    fbq('init', '672982815142267'); // seu Pixel
-    fbq('track', 'PageView');
-    fbq('track', 'ViewContent');
+      window.fbq && fbq('init', PIXEL_ID);
+      window.fbq && fbq('track', 'PageView');
+      window.fbq && fbq('track', 'ViewContent');
+    })();
   </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=672982815142267&ev=PageView&noscript=1" alt="">
+  </noscript>
 
   <style>
+    :root { --bg:#0f172a; --btn:#22c55e; --btnh:#16a34a; --fg:#fff; }
+    * { box-sizing:border-box; }
+    html, body { height:100%; }
     body {
-      background-color: #0f172a;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding-top: 100px;
+      margin:0; font-family: Arial, Helvetica, sans-serif; color:var(--fg);
+      background-color:var(--bg); display:grid; place-items:center; text-align:center; padding:24px;
     }
-    h1 {
-      font-size: 28px;
-      margin-bottom: 20px;
+    h1 { font-size:28px; margin:0 0 12px; }
+    p  { margin:0 0 24px; opacity:.9; }
+    a.btn {
+      background:var(--btn); color:#000; font-weight:700; font-size:18px;
+      padding:14px 28px; border-radius:10px; text-decoration:none; display:inline-block;
+      cursor:pointer; transition:filter .15s ease, transform .06s ease;
     }
-    .btn {
-      background-color: #22c55e;
-      color: #000;
-      font-weight: bold;
-      font-size: 18px;
-      padding: 14px 28px;
-      border-radius: 8px;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 30px;
-      cursor: pointer;
-    }
-    .btn:hover {
-      background-color: #16a34a;
-    }
+    a.btn:hover { background:var(--btnh); filter:brightness(1.02); }
+    a.btn:active { transform:translateY(1px); }
+    .hint { margin-top:18px; font-size:13px; opacity:.8; }
+    .copy { margin-top:8px; font-size:12px; opacity:.9; user-select:all; }
   </style>
 </head>
 <body>
 
-  <h1>🎯 Ready to Access the Private Telegram Channel?</h1>
-  <p>Click the button below to join and start now:</p>
+  <main>
+    <h1>🎯 Ready to Access the Private Telegram Channel?</h1>
+    <p>Click the button below to join and start now:</p>
 
-  <a class="btn" onclick="fbq('trackCustom', 'telegram_entry'); window.location.href='https://t.me/+o4VZafff0vFlZGJh';">
-    👉 Join the Telegram Channel
-  </a>
+    <!-- Fallback href is set on load; no inline JS -->
+    <a id="joinBtn" class="btn" href="#" target="_blank" rel="noopener noreferrer">
+      👉 Join the Telegram Channel
+    </a>
 
+    <div class="hint">If it doesn't open, copy this link:</div>
+    <div id="rawLink" class="copy"></div>
+  </main>
+
+  <script>
+    (function(){
+      var TELEGRAM_URL_BASE = "https://t.me/+o4VZafff0vFlZGJh";
+
+      function withQueryParams(baseUrl){
+        try {
+          var qs = window.location.search;
+          if(!qs) return baseUrl;
+          return baseUrl + (baseUrl.indexOf('?')>-1 ? '&' : '?') + qs.slice(1);
+        } catch(e){ return baseUrl; }
+      }
+
+      // Build final URL (preserve UTM/fbclid)
+      var finalUrl = withQueryParams(TELEGRAM_URL_BASE);
+
+      // Set visible link and fallback copy
+      var joinBtn = document.getElementById('joinBtn');
+      if (joinBtn) joinBtn.setAttribute('href', finalUrl);
+      var raw = document.getElementById('rawLink');
+      if (raw) raw.textContent = finalUrl;
+
+      // Click handler (tracks + navigates). Works even if fbq is blocked.
+      function handleClick(e){
+        try {
+          if (window.fbq) {
+            fbq('trackCustom', 'telegram_entry', { destination: finalUrl, ts: Date.now() });
+          }
+        } catch(err) { /* swallow */ }
+        // Small delay to let the pixel fire; then open
+        // Use target=_blank already set on the anchor
+        setTimeout(function(){ window.open(finalUrl, '_blank', 'noopener'); }, 120);
+        // Prevent default to avoid double navigation
+        if (e && e.preventDefault) e.preventDefault();
+        return false;
+      }
+
+      if (joinBtn) {
+        joinBtn.addEventListener('click', handleClick);
+      }
+    })();
+  </script>
 </body>
 </html>
