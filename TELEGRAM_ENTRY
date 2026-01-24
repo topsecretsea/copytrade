@@ -1,111 +1,138 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Access Telegram Channel</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Access Telegram</title>
+  <meta name="description" content="Access the Telegram channel. Click to join." />
+  <meta name="robots" content="noindex,nofollow" />
 
-  <!-- Meta Pixel (safe load) -->
+  <!-- Meta Pixel (replace PIXEL_ID) -->
   <script>
-    (function(){
-      var PIXEL_ID = "672982815142267";
-      if(!PIXEL_ID) return;
-      !(function(f,b,e,v,n,t,s){
-        if(f.fbq) return;
-        n=f.fbq=function(){ n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments) };
-        if(!f._fbq) f._fbq=n;
-        n.push=n; n.loaded=!0; n.version='2.0';
-        n.queue=[];
-        t=b.createElement(e); t.async=!0; t.src=v;
-        s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s);
-      })(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-
-      window.fbq && fbq('init', PIXEL_ID);
-      window.fbq && fbq('track', 'PageView');
-      window.fbq && fbq('track', 'ViewContent');
-    })();
+    (function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)
+    })(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2574683239598570');
+    fbq('track', 'PageView');
   </script>
   <noscript>
     <img height="1" width="1" style="display:none"
-         src="https://www.facebook.com/tr?id=672982815142267&ev=PageView&noscript=1" alt="">
+         src="https://www.facebook.com/tr?id=PIXEL_ID&ev=PageView&noscript=1"/>
   </noscript>
 
   <style>
-    :root { --bg:#0f172a; --btn:#22c55e; --btnh:#16a34a; --fg:#fff; }
-    * { box-sizing:border-box; }
-    html, body { height:100%; }
-    body {
-      margin:0; font-family: Arial, Helvetica, sans-serif; color:var(--fg);
-      background-color:var(--bg); display:grid; place-items:center; text-align:center; padding:24px;
+    :root { --w: 720px; }
+    body{
+      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:#0b0f19; color:#eaf0ff; line-height:1.45;
+      display:flex; min-height:100vh; align-items:center; justify-content:center;
+      padding:24px;
     }
-    h1 { font-size:28px; margin:0 0 12px; }
-    p  { margin:0 0 24px; opacity:.9; }
-    a.btn {
-      background:var(--btn); color:#000; font-weight:700; font-size:18px;
-      padding:14px 28px; border-radius:10px; text-decoration:none; display:inline-block;
-      cursor:pointer; transition:filter .15s ease, transform .06s ease;
+    .card{
+      width:100%; max-width:var(--w);
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:18px; padding:28px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.35);
     }
-    a.btn:hover { background:var(--btnh); filter:brightness(1.02); }
-    a.btn:active { transform:translateY(1px); }
-    .hint { margin-top:18px; font-size:13px; opacity:.8; }
-    .copy { margin-top:8px; font-size:12px; opacity:.9; user-select:all; }
+    h1{ margin:0 0 10px; font-size:28px; letter-spacing:-.2px; }
+    p{ margin:0 0 14px; color:rgba(234,240,255,.86); }
+    ul{ margin:0 0 18px 18px; color:rgba(234,240,255,.86); }
+    .cta{
+      display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;
+    }
+    a.btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:14px 18px; border-radius:14px; text-decoration:none; font-weight:700;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.10);
+      color:#eaf0ff;
+      min-width: 220px;
+    }
+    a.btn.primary{
+      background: rgba(0, 177, 106, .18);
+      border-color: rgba(0, 177, 106, .35);
+    }
+    .mini{
+      margin-top:14px; font-size:12px; color:rgba(234,240,255,.62);
+    }
+    .badge{
+      display:inline-block; font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.06);
+      margin-bottom:12px;
+    }
+    .divider{
+      height:1px; background:rgba(255,255,255,.10); margin:18px 0;
+    }
   </style>
 </head>
+
 <body>
+  <main class="card">
+    <div class="badge">Secure access • 1-click join</div>
+    <h1>Ready to access the Telegram channel?</h1>
+    <p>Click the button below to join. This step helps avoid wrong links and keeps access organized.</p>
 
-  <main>
-    <h1>🎯 Ready to Access the Private Telegram Channel?</h1>
-    <p>Click the button below to join and start now:</p>
+    <ul>
+      <li>Instant access after clicking</li>
+      <li>Works on mobile and desktop</li>
+      <li>No automatic redirects</li>
+    </ul>
 
-    <!-- Fallback href is set on load; no inline JS -->
-    <a id="joinBtn" class="btn" href="#" target="_blank" rel="noopener noreferrer">
-      👉 Join the Telegram Channel
-    </a>
+    <div class="divider"></div>
 
-    <div class="hint">If it doesn't open, copy this link:</div>
-    <div id="rawLink" class="copy"></div>
+    <p><strong>Important:</strong> Make sure Telegram is installed, then tap “Join”.</p>
+
+    <div class="cta">
+      <a class="btn primary" id="joinBtn" href="TELEGRAM_LINK" rel="noopener">
+        Join on Telegram
+      </a>
+      <a class="btn" id="helpBtn" href="https://telegram.org/" target="_blank" rel="noopener">
+        Get Telegram
+      </a>
+    </div>
+
+    <p class="mini" id="status"></p>
+
+    <p class="mini">
+      By proceeding, you confirm you want to open Telegram.
+    </p>
   </main>
 
   <script>
-    (function(){
-      var TELEGRAM_URL_BASE = "https://t.me/+o4VZafff0vFlZGJh";
+    // Track a "content view" after load
+    window.addEventListener('load', function () {
+      try { fbq('track', 'ViewContent'); } catch(e){}
+    });
 
-      function withQueryParams(baseUrl){
-        try {
-          var qs = window.location.search;
-          if(!qs) return baseUrl;
-          return baseUrl + (baseUrl.indexOf('?')>-1 ? '&' : '?') + qs.slice(1);
-        } catch(e){ return baseUrl; }
-      }
+    const joinBtn = document.getElementById('joinBtn');
+    const statusEl = document.getElementById('status');
 
-      // Build final URL (preserve UTM/fbclid)
-      var finalUrl = withQueryParams(TELEGRAM_URL_BASE);
+    function safeFbqCustom(eventName, params) {
+      try { fbq('trackCustom', eventName, params || {}); } catch(e) {}
+    }
 
-      // Set visible link and fallback copy
-      var joinBtn = document.getElementById('joinBtn');
-      if (joinBtn) joinBtn.setAttribute('href', finalUrl);
-      var raw = document.getElementById('rawLink');
-      if (raw) raw.textContent = finalUrl;
+    joinBtn.addEventListener('click', function () {
+      // Custom event for optimization
+      safeFbqCustom('telegram_entry', {
+        page: 'click',
+        source: 'button'
+      });
 
-      // Click handler (tracks + navigates). Works even if fbq is blocked.
-      function handleClick(e){
-        try {
-          if (window.fbq) {
-            fbq('trackCustom', 'telegram_entry', { destination: finalUrl, ts: Date.now() });
-          }
-        } catch(err) { /* swallow */ }
-        // Small delay to let the pixel fire; then open
-        // Use target=_blank already set on the anchor
-        setTimeout(function(){ window.open(finalUrl, '_blank', 'noopener'); }, 120);
-        // Prevent default to avoid double navigation
-        if (e && e.preventDefault) e.preventDefault();
-        return false;
-      }
+      // UX feedback (also reduces “instant bounce” look)
+      statusEl.textContent = 'Opening Telegram…';
 
-      if (joinBtn) {
-        joinBtn.addEventListener('click', handleClick);
-      }
-    })();
+      // Give the pixel a short moment; do NOT auto-redirect
+      // (the href still opens normally)
+      const t0 = Date.now();
+      while (Date.now() - t0 < 80) { /* tiny delay */ }
+    });
   </script>
 </body>
 </html>
+
